@@ -4,8 +4,8 @@ export const Typography = {
     medium: 'Montserrat-Medium',
     semiBold: 'Montserrat-SemiBold',
     bold: 'Montserrat-Bold',
-    titleRegular: 'PlayfairDisplay-Regular',
-    titleBold: 'PlayfairDisplay-Bold',
+    titleRegular: 'Montserrat-Regular',
+    titleBold: 'Montserrat-Bold',
   },
   sizes: {
     xs: 12,
