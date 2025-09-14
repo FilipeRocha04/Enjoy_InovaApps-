@@ -24,13 +24,13 @@ export default function SplashScreen() {
       style={styles.container}
     >
       <View style={styles.content}>
-        
         <View style={styles.logoContainer}>
-          <View style={styles.logoPlaceholder}>
-            <Text style={styles.logoText}>D</Text>
-          </View>
+          <Image
+            source={require('@/assets/images/Logo NexEnjoy.png')}
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
         </View>
-        
         <Text style={styles.bottomText}>Enjoy</Text>
       </View>
     </LinearGradient>
@@ -38,6 +38,10 @@ export default function SplashScreen() {
 }
 
 const styles = StyleSheet.create({
+  logoImage: {
+    width: 120,
+    height: 120,
+  },
   container: {
     flex: 1,
   },

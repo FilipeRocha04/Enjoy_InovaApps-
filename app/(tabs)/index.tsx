@@ -5,7 +5,8 @@ import {
   ScrollView, 
   TouchableOpacity, 
   StyleSheet, 
-  SafeAreaView 
+  SafeAreaView, 
+  Image
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
@@ -20,7 +21,11 @@ export default function HomeScreen() {
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Text style={styles.title}>Manifesto</Text>
-          <Text style={styles.subtitle}>Comunidade Disruption</Text>
+          <Image
+            source={require('@/assets/images/Logo NexEnjoy.png')}
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
         </View>
 
         <View style={styles.manifestoCard}>
@@ -115,6 +120,11 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  logoImage: {
+    width: 120,
+    height: 120,
+    marginBottom: 8,
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.primary,

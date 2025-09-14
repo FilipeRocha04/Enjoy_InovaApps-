@@ -105,9 +105,10 @@ export default function MembersScreen() {
   const matchesSearch = normalize(member.name).includes(normalize(searchText)) ||
              normalize(member.company).includes(normalize(searchText)) ||
              normalize(member.segment).includes(normalize(searchText));
-    const matchesLevel = normalize(member.level).includes(normalize(searchText));
+    const matchesLevel = normalize(member.level).includes(normalize(searchText)) ||
+      normalize(member.level).includes(normalize(searchText));
     const matchesSegment = selectedSegment === 'Todos' || normalize(member.segment) === normalize(selectedSegment);
-    return matchesSearch && matchesSegment && matchesLevel;
+    return matchesSearch && matchesSegment;
   });
 
   const renderMemberCard = ({ item }: { item: typeof mockMembers[0] }) => (
