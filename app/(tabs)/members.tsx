@@ -100,10 +100,13 @@ export default function MembersScreen() {
   };
 
   const filteredMembers = mockMembers.filter(member => {
-    const matchesSearch = member.name.toLowerCase().includes(searchText.toLowerCase()) ||
-                         member.company.toLowerCase().includes(searchText.toLowerCase());
-    const matchesSegment = selectedSegment === 'Todos' || member.segment === selectedSegment;
-    return matchesSearch && matchesSegment;
+  const normalize = (str: string) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  // Mantém apenas a versão correta abaixo
+  const matchesSearch = normalize(member.name).includes(normalize(searchText)) ||
+             normalize(member.company).includes(normalize(searchText)) ||
+             normalize(member.segment).includes(normalize(searchText));
+  const matchesSegment = selectedSegment === 'Todos' || normalize(member.segment) === normalize(selectedSegment);
+  return matchesSearch && matchesSegment;
   });
 
   const renderMemberCard = ({ item }: { item: typeof mockMembers[0] }) => (
@@ -148,7 +151,7 @@ export default function MembersScreen() {
           <Search size={20} color={Colors.text.muted} />
           <TextInput
             style={styles.searchInput}
-            placeholder="Buscar por nome ou empresa"
+            placeholder="Buscar por nome, empresa ou segmento"
             placeholderTextColor={Colors.text.muted}
             value={searchText}
             onChangeText={setSearchText}
