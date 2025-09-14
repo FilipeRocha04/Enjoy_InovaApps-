@@ -7,7 +7,8 @@ import {
   StyleSheet, 
   SafeAreaView,
   KeyboardAvoidingView,
-  Platform 
+  Platform,
+  Image
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
@@ -42,7 +43,13 @@ export default function LoginScreen() {
           <View style={styles.header}>
             <Text style={styles.title}>Bem-vindo</Text>
             
-            <Text style={styles.subtitle}>Acesse sua conta</Text>
+          
+            <Image
+              source={require('@/assets/images/Logo NexEnjoy - text.png')}
+              style={styles.logoTextImage}
+              resizeMode="contain"
+            />
+              <Text style={styles.subtitle}>Acesse sua conta</Text>
           </View>
 
           <View style={styles.form}>
@@ -93,6 +100,13 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
+  logoTextImage: {
+    width: 180,
+    height: 40,
+    alignSelf: 'center',
+    marginTop: 12,
+    marginBottom: 12,
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.primary,
