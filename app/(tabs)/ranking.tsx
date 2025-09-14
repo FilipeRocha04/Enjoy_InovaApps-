@@ -60,15 +60,13 @@ const mockRanking = [
 ];
 
 const badges = [
-  { name: 'Conectora', description: 'Fez mais de 50 conexões', icon: '🤝' },
-  { name: 'Inovadora', description: 'Compartilhou ideias revolucionárias', icon: '💡' },
-  { name: 'Top Indicador', description: 'Mais de 20 indicações realizadas', icon: '⭐' },
-  { name: 'Visionário', description: 'Líder em projetos transformadores', icon: '🔮' },
-  { name: 'Networker', description: 'Especialista em networking', icon: '🌐' },
-  { name: 'Mentor', description: 'Orientou outros membros', icon: '🎓' },
-  { name: 'Estrategista', description: 'Planejamento estratégico excepcional', icon: '♟️' },
-  { name: 'Líder', description: 'Liderança inspiradora', icon: '👑' },
-  { name: 'Investidor', description: 'Investimentos estratégicos', icon: '💰' },
+  { name: 'Conector Mestre', description: 'Fez mais de 50 conexões', icon: '🤝' },
+  { name: 'Arquiteto de Negócio', description: 'Para quem fecha contratos acima de 500 mil', icon: '💵' },
+  { name: 'Influencer Ouro', description: 'Para quem gera indicações estratégicas de alto impacto', icon: '⭐' },
+  { name: 'Visionário', description: 'Para quem sempre mantém o perfil atualizado e engajado', icon: '💡' },
+  { name: 'Guardião da comunidade', description: 'Para quem ajuda os outros membros a crescer', icon: '🛡️' },
+  { name: 'Impulsionador', description: 'Para quem gera um ROI coletivo acima de R$ 1 milhão', icon: '🚀' },
+
 ];
 
 export default function RankingScreen() {
