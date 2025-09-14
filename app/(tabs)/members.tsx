@@ -101,12 +101,13 @@ export default function MembersScreen() {
 
   const filteredMembers = mockMembers.filter(member => {
   const normalize = (str: string) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  // Mantém apenas a versão correta abaixo
+ 
   const matchesSearch = normalize(member.name).includes(normalize(searchText)) ||
              normalize(member.company).includes(normalize(searchText)) ||
              normalize(member.segment).includes(normalize(searchText));
-  const matchesSegment = selectedSegment === 'Todos' || normalize(member.segment) === normalize(selectedSegment);
-  return matchesSearch && matchesSegment;
+    const matchesLevel = normalize(member.level).includes(normalize(searchText));
+    const matchesSegment = selectedSegment === 'Todos' || normalize(member.segment) === normalize(selectedSegment);
+    return matchesSearch && matchesSegment && matchesLevel;
   });
 
   const renderMemberCard = ({ item }: { item: typeof mockMembers[0] }) => (

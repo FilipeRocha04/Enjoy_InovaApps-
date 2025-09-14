@@ -24,7 +24,6 @@ export default function SplashScreen() {
       style={styles.container}
     >
       <View style={styles.content}>
-        <Text style={styles.topText}>Comunidade Disruption</Text>
         
         <View style={styles.logoContainer}>
           <View style={styles.logoPlaceholder}>

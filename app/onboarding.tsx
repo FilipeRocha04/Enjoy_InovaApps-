@@ -11,6 +11,7 @@ import {
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import { Typography } from '@/constants/Typography';
+import { Rocket, Handshake, Trophy } from 'lucide-react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -18,17 +19,27 @@ const onboardingData = [
   {
     title: 'Bem-vindo à Disruption',
     description: 'Uma comunidade exclusiva para empresários de alto nível compartilharem experiências e gerarem novos negócios.',
-    icon: '🚀',
+    icon: Rocket,
+    color: '#b18c54',
   },
   {
     title: 'Faça Conexões',
-    description: 'Conecte-se com outros membros da sua empresa e do seu segmento. Expanda sua rede de contatos profissionais.',
-    icon: '🤝',
+    description: 'Conecte-se com outros membros da sua empresa e do seu segmento.\n\nExpanda sua rede de contatos profissionais.',
+    icon: Handshake,
+    color: '#b18c54',
   },
   {
     title: 'Ganhe Pontos',
-    description: 'Participe ativamente da comunidade, faça indicações e acumule pontos. Concorra a prêmios exclusivos e viagens.',
-    icon: '🏆',
+    description:
+      'O aplicativo premia o engajamento e a contribuição do usuário com pontos:\n\n' +
+      '• Indicação Fornecida: +20 pontos\n' +
+      '• Indicação Recebida: +30 pontos\n' +
+      '• Negócio Fechado: +150 pontos\n' +
+      '• Atualização de Perfil: +10 pontos\n' +
+      '• Envio de Mensagem/Conexão no App: +15 pontos\n' +
+      '• Feedback ou Recomendação: +10 pontos',
+    icon: Trophy,
+    color: '#b18c54',
   },
 ];
 
@@ -56,7 +67,11 @@ export default function OnboardingScreen() {
         </TouchableOpacity>
 
         <View style={styles.slideContainer}>
-          <Text style={styles.icon}>{onboardingData[currentIndex].icon}</Text>
+          {React.createElement(onboardingData[currentIndex].icon, {
+            size: 80,
+            color: onboardingData[currentIndex].color,
+            style: styles.icon,
+          })}
           <Text style={styles.title}>{onboardingData[currentIndex].title}</Text>
           <Text style={styles.description}>{onboardingData[currentIndex].description}</Text>
         </View>

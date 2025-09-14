@@ -77,13 +77,7 @@ export default function ProfileScreen() {
           </View>
           {/* Campo de texto editável para Bio abaixo do campo 'socio' */}
   <View style={styles.bioContainer}>
-    <TextInput
-      style={styles.bioTextInput}
-      value={userData.bio}
-      editable={false}
-      multiline
-      placeholder="Aqui ficará a BIO gerada pela IA"
-    />
+    <Text style={styles.bioText}>{userData.bio}</Text>
   </View>
         </View>
         <View style={{ alignItems: 'center', marginTop: 12 }}>
@@ -364,14 +358,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   bioTextInput: {
-    fontFamily: Typography.fonts.medium,
-    fontSize: Typography.sizes.md,
-    color: Colors.text.primary,
-    textAlign: 'center',
-    backgroundColor: Colors.background.card,
-    borderRadius: 12,
-    padding: 12,
-    minHeight: 60,
+  fontFamily: Typography.fonts.medium,
+  fontSize: Typography.sizes.md,
+  color: Colors.text.primary,
+  textAlign: 'center',
+  backgroundColor: Colors.background.card,
+  borderRadius: 12,
+  padding: 12,
+  minHeight: 120,
+  flexGrow: 1,
+  width: '100%',
     marginTop: 8,
   },
   statsContainer: {

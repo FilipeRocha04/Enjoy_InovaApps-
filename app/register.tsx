@@ -19,6 +19,7 @@ import { Typography } from '@/constants/Typography';
 
 interface FormData {
   nome: string;
+  cpf: string;
   empresa: string;
   anoNascimento: string;
   local: string;
@@ -56,6 +57,7 @@ export default function RegisterScreen() {
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     nome: '',
+    cpf: '',
     empresa: '',
     anoNascimento: '',
     local: '',
@@ -99,7 +101,7 @@ export default function RegisterScreen() {
 
   const handleSubmit = () => {
     // Validação básica
-    const requiredFields = ['nome', 'empresa', 'email', 'anoNascimento', 'local'];
+  const requiredFields = ['nome', 'cpf', 'empresa', 'email', 'anoNascimento', 'local'];
     const missingFields = requiredFields.filter(field => !formData[field as keyof FormData]);
     if (missingFields.length > 0) {
       Alert.alert('Erro', 'Por favor, preencha todos os campos obrigatórios.');
@@ -136,6 +138,7 @@ export default function RegisterScreen() {
           
 
           <View style={styles.form}>
+            
             {/* Foto de perfil */}
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Foto de Perfil</Text>
@@ -159,6 +162,20 @@ export default function RegisterScreen() {
                 onChangeText={(value) => updateFormData('nome', value)}
                 placeholder="Seu nome completo"
                 placeholderTextColor={Colors.text.muted}
+              />
+            </View>
+
+            {/* CPF */}
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>CPF *</Text>
+              <TextInput
+                style={styles.input}
+                value={formData.cpf}
+                onChangeText={(value) => updateFormData('cpf', value)}
+                placeholder="Digite seu CPF"
+                placeholderTextColor={Colors.text.muted}
+                keyboardType="numeric"
+                maxLength={14}
               />
             </View>
 
