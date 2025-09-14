@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Typography } from '@/constants/Typography';
-import { Trophy, Medal, Award, Star } from 'lucide-react-native';
+import { Trophy, Medal, Award, Star, Handshake, Building, Briefcase, Eye, Lightbulb, Shield, Rocket } from 'lucide-react-native';
 
 const mockRanking = [
   {
@@ -18,7 +18,7 @@ const mockRanking = [
     company: 'Tech Innovation',
     points: 2450,
     level: 'infinity',
-    badges: ['Conectora', 'Inovadora', 'Top Indicador'],
+    badges: ['Conector Mestre', 'Influencer Ouro', 'Impulsionador'],
     position: 1,
   },
   {
@@ -27,7 +27,7 @@ const mockRanking = [
     company: 'Silva Empreendimentos',
     points: 2100,
     level: 'socio',
-    badges: ['Visionário', 'Networker'],
+    badges: ['Visionário', 'Guardião da comunidade'],
     position: 2,
   },
   {
@@ -36,7 +36,7 @@ const mockRanking = [
     company: 'Oliveira Consultoria',
     points: 1890,
     level: 'membro',
-    badges: ['Mentor', 'Estrategista'],
+    badges: ['Arquiteto de Negócio', 'Impulsionador'],
     position: 3,
   },
   {
@@ -45,7 +45,7 @@ const mockRanking = [
     company: 'Costa & Associados',
     points: 1720,
     level: 'infinity',
-    badges: ['Líder'],
+    badges: ['Visionário'],
     position: 4,
   },
   {
@@ -54,19 +54,18 @@ const mockRanking = [
     company: 'Lima Ventures',
     points: 1580,
     level: 'membro',
-    badges: ['Investidor'],
+    badges: ['Guardião da comunidade'],
     position: 5,
   },
 ];
 
 const badges = [
-  { name: 'Conector Mestre', description: 'Fez mais de 50 conexões', icon: '🤝' },
-  { name: 'Arquiteto de Negócio', description: 'Para quem fecha contratos acima de 500 mil', icon: '💵' },
-  { name: 'Influencer Ouro', description: 'Para quem gera indicações estratégicas de alto impacto', icon: '⭐' },
-  { name: 'Visionário', description: 'Para quem sempre mantém o perfil atualizado e engajado', icon: '💡' },
-  { name: 'Guardião da comunidade', description: 'Para quem ajuda os outros membros a crescer', icon: '🛡️' },
-  { name: 'Impulsionador', description: 'Para quem gera um ROI coletivo acima de R$ 1 milhão', icon: '🚀' },
-
+  { name: 'Conector Mestre', description: 'Fez mais de 50 conexões', icon: Handshake },
+  { name: 'Arquiteto de Negócio', description: 'Para quem fecha contratos acima de 500 mil', icon: Building },
+  { name: 'Influencer Ouro', description: 'Para quem gera indicações estratégicas de alto impacto', icon: Star },
+  { name: 'Visionário', description: 'Para quem sempre mantém o perfil atualizado e engajado', icon: Lightbulb },
+  { name: 'Guardião da comunidade', description: 'Para quem ajuda os outros membros a crescer', icon: Shield },
+  { name: 'Impulsionador', description: 'Para quem gera um ROI coletivo acima de R$ 1 milhão', icon: Rocket },
 ];
 
 export default function RankingScreen() {
@@ -100,14 +99,17 @@ export default function RankingScreen() {
         <Text style={styles.memberCompany}>{item.company}</Text>
         
         <View style={styles.badgesContainer}>
-          {item.badges.slice(0, 2).map((badge, index) => (
-            <View key={index} style={styles.badgeChip}>
-              <Text style={styles.badgeChipText}>{badge}</Text>
-            </View>
-          ))}
-          {item.badges.length > 2 && (
-            <Text style={styles.moreBadges}>+{item.badges.length - 2}</Text>
-          )}
+            {item.badges.slice(0, 2).map((badgeName, index) => {
+              // Find badge icon by name
+              const badgeObj = badges.find(b => b.name === badgeName);
+              const IconComponent = badgeObj ? badgeObj.icon : Award;
+              return (
+                <IconComponent key={index} size={18} color="#B87333" style={styles.badgeIconOnly} />
+              );
+            })}
+            {item.badges.length > 2 && (
+              <Text style={styles.moreBadges}>+{item.badges.length - 2}</Text>
+            )}
         </View>
       </View>
       
@@ -120,7 +122,7 @@ export default function RankingScreen() {
 
   const renderBadgeItem = ({ item }: { item: typeof badges[0] }) => (
     <View style={styles.badgeCard}>
-      <Text style={styles.badgeIcon}>{item.icon}</Text>
+      {item.icon ? <item.icon size={32} color="#B87333" style={styles.badgeIcon} /> : null}
       <View style={styles.badgeInfo}>
         <Text style={styles.badgeName}>{item.name}</Text>
         <Text style={styles.badgeDescription}>{item.description}</Text>
@@ -264,17 +266,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  badgeChip: {
-    backgroundColor: Colors.accent,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
+  badgeIconOnly: {
+    fontSize: Typography.sizes.md,
     marginRight: 8,
-  },
-  badgeChipText: {
-    fontFamily: Typography.fonts.medium,
-    fontSize: Typography.sizes.xs,
-    color: Colors.primary,
   },
   moreBadges: {
     fontFamily: Typography.fonts.medium,

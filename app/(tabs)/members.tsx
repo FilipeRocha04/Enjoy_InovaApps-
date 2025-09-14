@@ -188,8 +188,10 @@ export default function MembersScreen() {
         data={filteredMembers}
         renderItem={renderMemberCard}
         keyExtractor={(item) => item.id}
+        numColumns={2}
+        columnWrapperStyle={{ justifyContent: 'space-between', paddingHorizontal: 20 }}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.membersList}
+        contentContainerStyle={styles.membersGallery}
       />
 
       <Modal
@@ -237,7 +239,13 @@ export default function MembersScreen() {
                     <Text style={styles.actionButtonText}>Indicar</Text>
                   </TouchableOpacity>
                   
-                  <TouchableOpacity style={styles.actionButton}>
+                  <TouchableOpacity
+                    style={styles.actionButton}
+                    onPress={() => {
+                      setModalVisible(false);
+                      router.push({ pathname: '/(tabs)/chat', params: { member: selectedMember?.name } });
+                    }}
+                  >
                     <MessageSquare size={20} color={Colors.primary} />
                     <Text style={styles.actionButtonText}>Mensagem</Text>
                   </TouchableOpacity>
@@ -314,17 +322,23 @@ const styles = StyleSheet.create({
   filterChipTextActive: {
     color: Colors.primary,
   },
-  membersList: {
-    paddingHorizontal: 20,
+  membersGallery: {
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    gap: 12,
   },
   memberCard: {
     backgroundColor: Colors.background.card,
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
-    flexDirection: 'row',
+    flex: 1,
+    flexDirection: 'column',
     alignItems: 'center',
     borderWidth: 2,
+    marginHorizontal: 6,
+    minWidth: 150,
+    maxWidth: '48%',
   },
   memberAvatar: {
     width: 60,
@@ -332,7 +346,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginBottom: 12,
   },
   memberAvatarText: {
     fontFamily: Typography.fonts.bold,
@@ -341,32 +355,39 @@ const styles = StyleSheet.create({
   },
   memberInfo: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   memberName: {
     fontFamily: Typography.fonts.bold,
     fontSize: Typography.sizes.lg,
     color: Colors.text.primary,
     marginBottom: 4,
+    textAlign: 'center',
   },
   memberCompany: {
     fontFamily: Typography.fonts.medium,
     fontSize: Typography.sizes.md,
     color: Colors.text.muted,
     marginBottom: 4,
+    textAlign: 'center',
   },
   memberSegment: {
     fontFamily: Typography.fonts.regular,
     fontSize: Typography.sizes.sm,
     color: Colors.text.muted,
     marginBottom: 8,
+    textAlign: 'center',
   },
   memberLevel: {
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
+    marginTop: 4,
   },
   levelText: {
     fontFamily: Typography.fonts.bold,
     fontSize: Typography.sizes.xs,
     letterSpacing: 1,
+    textAlign: 'center',
   },
   modalOverlay: {
     flex: 1,

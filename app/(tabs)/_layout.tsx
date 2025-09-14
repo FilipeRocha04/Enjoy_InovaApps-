@@ -1,5 +1,6 @@
 import { Tabs } from 'expo-router';
 import { Chrome as Home, Users, MessageSquare, Trophy, User } from 'lucide-react-native';
+import { Megaphone } from 'lucide-react-native';
 import { Colors } from '@/constants/Colors';
 import { Typography } from '@/constants/Typography';
 
@@ -47,7 +48,7 @@ export default function TabLayout() {
         options={{
           title: 'Feed',
           tabBarIcon: ({ size, color }) => (
-            <MessageSquare size={size} color={color} />
+            <Megaphone size={size} color={color} />
           ),
         }}
       />
@@ -66,6 +67,15 @@ export default function TabLayout() {
           title: 'Perfil',
           tabBarIcon: ({ size, color }) => (
             <User size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="chat"
+        options={{
+          title: 'Chat',
+          tabBarIcon: ({ size, color }) => (
+            <MessageSquare size={size} color={color} />
           ),
         }}
       />

@@ -41,6 +41,7 @@ const mockChats = [
 
 export default function ChatScreen() {
   const [searchText, setSearchText] = useState('');
+  const [activeChat, setActiveChat] = useState<typeof mockChats[0] | null>(null);
 
   const filteredChats = mockChats.filter(chat =>
     chat.name.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -48,7 +49,7 @@ export default function ChatScreen() {
   );
 
   const renderChatItem = ({ item }: { item: typeof mockChats[0] }) => (
-    <TouchableOpacity style={styles.chatItem}>
+    <TouchableOpacity style={styles.chatItem} onPress={() => setActiveChat(item)}>
       <View style={styles.avatar}>
         <Text style={styles.avatarText}>{item.name.charAt(0)}</Text>
       </View>
@@ -77,37 +78,64 @@ export default function ChatScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Mensagens</Text>
-        
-        <View style={styles.searchContainer}>
-          <Search size={20} color={Colors.text.muted} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Buscar conversas"
-            placeholderTextColor={Colors.text.muted}
-            value={searchText}
-            onChangeText={setSearchText}
-          />
+      {activeChat ? (
+        <View style={{ flex: 1, backgroundColor: Colors.background.card }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', padding: 16, borderBottomWidth: 1, borderBottomColor: Colors.border }}>
+            <TouchableOpacity onPress={() => setActiveChat(null)} style={{ marginRight: 12, padding: 8 }}>
+              <Text style={{ fontSize: 22, color: Colors.text.primary }}>←</Text>
+            </TouchableOpacity>
+            <View style={styles.avatar}>
+              <Text style={styles.avatarText}>{activeChat.name.charAt(0)}</Text>
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.chatName}>{activeChat.name}</Text>
+              <Text style={styles.company}>{activeChat.company}</Text>
+            </View>
+          </View>
+          <View style={{ flex: 1, padding: 16 }}>
+            {/* Mensagens simuladas */}
+            <View style={{ alignSelf: 'flex-start', backgroundColor: Colors.background.primary, borderRadius: 16, padding: 10, marginBottom: 8, maxWidth: '80%' }}><Text style={styles.lastMessage}>Olá, tudo bem?</Text></View>
+            <View style={{ alignSelf: 'flex-end', backgroundColor: Colors.accent, borderRadius: 16, padding: 10, marginBottom: 8, maxWidth: '80%' }}><Text style={[styles.lastMessage, { color: Colors.primary }]}>Oi! Tudo ótimo, e você?</Text></View>
+            <View style={{ alignSelf: 'flex-start', backgroundColor: Colors.background.primary, borderRadius: 16, padding: 10, marginBottom: 8, maxWidth: '80%' }}><Text style={styles.lastMessage}>{activeChat.lastMessage}</Text></View>
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center', padding: 12, borderTopWidth: 1, borderTopColor: Colors.border, backgroundColor: Colors.background.card }}>
+            <TextInput style={{ flex: 1, backgroundColor: Colors.background.primary, borderRadius: 12, paddingHorizontal: 16, paddingVertical: 10, fontFamily: Typography.fonts.regular, fontSize: Typography.sizes.md, color: Colors.text.primary, marginRight: 8 }} placeholder="Digite sua mensagem..." />
+            <TouchableOpacity style={{ backgroundColor: Colors.accent, borderRadius: 12, paddingHorizontal: 16, paddingVertical: 10 }}><Text style={{ fontFamily: Typography.fonts.bold, fontSize: Typography.sizes.md, color: Colors.primary }}>Enviar</Text></TouchableOpacity>
+          </View>
         </View>
-      </View>
-
-      {filteredChats.length > 0 ? (
-        <FlatList
-          data={filteredChats}
-          renderItem={renderChatItem}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.chatList}
-        />
       ) : (
-        <View style={styles.emptyState}>
-          <MessageSquare size={64} color={Colors.text.muted} />
-          <Text style={styles.emptyStateTitle}>Nenhuma conversa</Text>
-          <Text style={styles.emptyStateDescription}>
-            {searchText ? 'Nenhuma conversa encontrada' : 'Comece uma conversa com outros membros'}
-          </Text>
-        </View>
+        <>
+          <View style={styles.header}>
+            <Text style={styles.title}>Mensagens</Text>
+            <View style={styles.searchContainer}>
+              <Search size={20} color={Colors.text.muted} />
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Buscar conversas"
+                placeholderTextColor={Colors.text.muted}
+                value={searchText}
+                onChangeText={setSearchText}
+              />
+            </View>
+          </View>
+          {filteredChats.length > 0 ? (
+            <FlatList
+              data={filteredChats}
+              renderItem={renderChatItem}
+              keyExtractor={(item) => item.id}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.chatList}
+            />
+          ) : (
+            <View style={styles.emptyState}>
+              <MessageSquare size={64} color={Colors.text.muted} />
+              <Text style={styles.emptyStateTitle}>Nenhuma conversa</Text>
+              <Text style={styles.emptyStateDescription}>
+                {searchText ? 'Nenhuma conversa encontrada' : 'Comece uma conversa com outros membros'}
+              </Text>
+            </View>
+          )}
+        </>
       )}
     </SafeAreaView>
   );
