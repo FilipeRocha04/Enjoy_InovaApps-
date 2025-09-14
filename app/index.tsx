@@ -1,0 +1,91 @@
+import React, { useEffect } from 'react';
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { useRouter } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Colors } from '@/constants/Colors';
+import { Typography } from '@/constants/Typography';
+
+const { width, height } = Dimensions.get('window');
+
+export default function SplashScreen() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.replace('/login');
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [router]);
+
+  return (
+    <LinearGradient
+      colors={[Colors.primary, '#1a1a1a', Colors.primary]}
+      style={styles.container}
+    >
+      <View style={styles.content}>
+        <Text style={styles.topText}>Comunidade Disruption</Text>
+        
+        <View style={styles.logoContainer}>
+          <View style={styles.logoPlaceholder}>
+            <Text style={styles.logoText}>D</Text>
+          </View>
+        </View>
+        
+        <Text style={styles.bottomText}>Enjoy</Text>
+      </View>
+    </LinearGradient>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 80,
+    paddingHorizontal: 20,
+  },
+  topText: {
+    fontFamily: Typography.fonts.titleBold,
+    fontSize: Typography.sizes.title,
+    color: Colors.accent,
+    textAlign: 'center',
+    letterSpacing: 1,
+  },
+  logoContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logoPlaceholder: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: Colors.accent,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 8,
+    shadowColor: Colors.accent,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+  },
+  logoText: {
+    fontFamily: Typography.fonts.titleBold,
+    fontSize: 48,
+    color: Colors.primary,
+  },
+  bottomText: {
+    fontFamily: Typography.fonts.medium,
+    fontSize: Typography.sizes.lg,
+    color: Colors.text.primary,
+    letterSpacing: 2,
+  },
+});
