@@ -24,6 +24,13 @@ export default function SplashScreen() {
       style={styles.container}
     >
       <View style={styles.content}>
+        <View style={styles.topLogoContainer}>
+          <Image
+            source={require('@/assets/images/Comunidade D.png')}
+            style={styles.topLogoImage}
+            resizeMode="contain"
+          />
+        </View>
         <View style={styles.logoContainer}>
           <Image
             source={require('@/assets/images/Logo NexEnjoy.png')}
@@ -38,9 +45,18 @@ export default function SplashScreen() {
 }
 
 const styles = StyleSheet.create({
+  topLogoContainer: {
+    alignItems: 'center',
+    marginTop: 40,
+    marginBottom: 16,
+  },
+  topLogoImage: {
+    width: 300,
+    height: 90,
+  },
   logoImage: {
-    width: 120,
-    height: 120,
+    width: 220,
+    height: 220,
   },
   container: {
     flex: 1,
