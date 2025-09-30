@@ -1,0 +1,1 @@
+Aplicação desenvolvida em react native juntamente com 2 colegas de faculdade, o desafio proposto pela universidade Vila Velha - UVV no hackathon InovaApps, consistia em desenvolver uma espécie de rede social interna para a empresa Enjoy
